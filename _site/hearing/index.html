@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A11yLab</title>
+  <meta name="description" content="アクセシビリティ実験室">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <script src="/assets/js/theme-switch.js"></script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+  <header role="banner" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid var(--border-color);">
+    <div class="logo" style="font-weight: bold; font-size: 1.5rem;">
+      <a href="/" style="text-decoration: none; color: var(--text-color);">A11yLab</a>
+    </div>
+    <nav role="navigation" aria-label="メインメニュー">
+      <button id="theme-toggle" aria-label="カラーモード切替" style="background: none; border: 1px solid var(--text-color); color: var(--text-color); padding: 0.5rem 1rem; cursor: pointer; border-radius: 4px;">
+        Contrast
+      </button>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <h1>聴覚アクセシビリティ記事一覧</h1>
+<ul>
+    
+    <li>
+        <a href="/hearing/captions/">字幕の役割について</a>
+        <p><p>聴覚アクセシビリティにおいて、字幕は音声情報を文字化し、聴覚障害者にコンテンツを提供します。正確な同期と読みやすいフォントが重要です。</p>
+</p>
+    </li>
+    
+</ul>
+  </main>
+
+  <footer role="contentinfo" style="text-align: center; padding: 2rem; margin-top: 4rem; border-top: 1px solid var(--border-color);">
+    <p>&copy; 2025 A11yLab. All rights reserved.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,28 @@
+title: A11yLab
+email: "silentmalachite@gmail.com"
+description: "アクセシビリティ実験室"
+baseurl: "/A11yLab"
+url: "https://SilentMalachite.github.io"
+markdown: kramdown
+theme_mode: auto # custom
+
+collections:
+  visual:
+    output: true
+    permalink: /:collection/:name/
+  hearing:
+    output: true
+    permalink: /:collection/:name/
+  physical:
+    output: true
+    permalink: /:collection/:name/
+
+# Build settings
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+sass:
+  style: compressed

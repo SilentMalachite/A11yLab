@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | A11yLab</title>
+  <meta name="description" content="アクセシビリティ実験室">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <script src="/assets/js/theme-switch.js"></script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+  <header role="banner" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid var(--border-color);">
+    <div class="logo" style="font-weight: bold; font-size: 1.5rem;">
+      <a href="/" style="text-decoration: none; color: var(--text-color);">A11yLab</a>
+    </div>
+    <nav role="navigation" aria-label="メインメニュー">
+      <button id="theme-toggle" aria-label="カラーモード切替" style="background: none; border: 1px solid var(--text-color); color: var(--text-color); padding: 0.5rem 1rem; cursor: pointer; border-radius: 4px;">
+        Contrast
+      </button>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero"
+    style="text-align: center; padding: 6rem 1rem; background: linear-gradient(135deg, var(--bg-color) 0%, var(--card-bg) 100%);">
+    <h1 style="font-size: 3rem; margin-bottom: 1rem;">Webを、すべての人に解放する。</h1>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+        A11yLabは、アクセシビリティの未来を探求し、実践する研究所です。
+    </p>
+    <a href="#features" class="cta-button"
+        style="display: inline-block; background-color: var(--accent-color); color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 4px; font-weight: bold;">
+        もっと詳しく
+    </a>
+</section>
+
+<section id="features" class="features" style="padding: 4rem 2rem; max-width: 1200px; margin: 0 auto;">
+    <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+        <!-- Visual -->
+        <article class="card" aria-labelledby="visual-title">
+            <div class="card-content"
+                style="background: var(--card-bg); padding: 2rem; border: 1px solid var(--border-color); border-radius: 8px; height: 100%;">
+                <img src="/assets/images/illustration-visual.png" alt="色や光が音や触覚に変換される様子" class="card-illustration">
+                <h2 id="visual-title" style="margin-top: 0;">Visual</h2>
+                <p>視覚障がいへのアプローチ。コントラスト、読み上げ対応、拡大表示など。</p>
+                <a href="/visual/"
+                    style="color: var(--link-color); text-decoration: underline;">Visualの研究を見る</a>
+            </div>
+        </article>
+
+        <!-- Hearing -->
+        <article class="card" aria-labelledby="hearing-title">
+            <div class="card-content"
+                style="background: var(--card-bg); padding: 2rem; border: 1px solid var(--border-color); border-radius: 8px; height: 100%;">
+                <img src="/assets/images/illustration-hearing.png" alt="音波が美しい波紋となって文字や光に変わる様子" class="card-illustration">
+                <h2 id="hearing-title" style="margin-top: 0;">Hearing</h2>
+                <p>聴覚障がいへのアプローチ。字幕、手話、視覚的フィードバックなど。</p>
+                <a href="/hearing/"
+                    style="color: var(--link-color); text-decoration: underline;">Hearingの研究を見る</a>
+            </div>
+        </article>
+
+        <!-- Physical -->
+        <article class="card" aria-labelledby="physical-title">
+            <div class="card-content"
+                style="background: var(--card-bg); padding: 2rem; border: 1px solid var(--border-color); border-radius: 8px; height: 100%;">
+                <img src="/assets/images/illustration-physical.png" alt="キーボードやスイッチが魔法のように軽やかに操作できる様子" class="card-illustration">
+                <h2 id="physical-title" style="margin-top: 0;">Physical</h2>
+                <p>身体障がいへのアプローチ。キーボード操作、スイッチコントロール対応など。</p>
+                <a href="/physical/"
+                    style="color: var(--link-color); text-decoration: underline;">Physicalの研究を見る</a>
+            </div>
+        </article>
+    </div>
+</section>
+
+<section class="statement" style="padding: 4rem 2rem; background: var(--card-bg); text-align: center;">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h2>なぜ A11yLab なのか</h2>
+        <p style="font-size: 1.1rem; line-height: 1.6;">
+            インターネットは誰にでも開かれているべきです。しかし、多くのWebサイトは依然としてバリアを持っています。<br>
+            私たちは技術とデザインの力で、そのバリアを取り除くための実験（Lab）を続けていきます。
+        </p>
+    </div>
+</section>
+
+<style>
+    .card {
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover,
+    .card:focus-within {
+        transform: translateY(-8px);
+    }
+</style>
+  </main>
+
+  <footer role="contentinfo" style="text-align: center; padding: 2rem; margin-top: 4rem; border-top: 1px solid var(--border-color);">
+    <p>&copy; 2025 A11yLab. All rights reserved.</p>
+  </footer>
+</body>
+</html>

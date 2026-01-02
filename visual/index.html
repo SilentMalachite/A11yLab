@@ -1,0 +1,13 @@
+---
+layout: default
+---
+
+<h1>視覚アクセシビリティ記事一覧</h1>
+<ul>
+    {% for post in site.visual %}
+    <li>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <p>{{ post.excerpt }}</p>
+    </li>
+    {% endfor %}
+</ul>
