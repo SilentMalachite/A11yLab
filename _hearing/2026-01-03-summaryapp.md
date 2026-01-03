@@ -5,7 +5,8 @@ date: 2026-01-03
 ---
 
 
-![要約筆記アプリのある生活](/A11yLab/assets/images/hearing-summaryapp.jpg)
+
+![要約筆記アプリのある生活](/A11yLab/assets/images/hearing-summaryapp.png)
 
 難聴を持つかたにとって、聴覚情報の代替手段として、要約筆記アプリがあります。
 
