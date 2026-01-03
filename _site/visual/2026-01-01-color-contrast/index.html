@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>コントラスト比の基本 | A11yLab</title>
+  <meta name="description" content="アクセシビリティ探求室">
+  <link rel="stylesheet" href="/A11yLab/assets/css/styles.css">
+  <script src="/A11yLab/assets/js/theme-switch.js"></script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+  <header role="banner" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid var(--border-color);">
+    <div class="logo" style="font-weight: bold; font-size: 1.5rem;">
+      <a href="/A11yLab/" style="text-decoration: none; color: var(--text-color);">A11yLab</a>
+    </div>
+    <nav role="navigation" aria-label="メインメニュー">
+      <button id="theme-toggle" aria-label="カラーモード切替" style="background: none; border: 1px solid var(--text-color); color: var(--text-color); padding: 0.5rem 1rem; cursor: pointer; border-radius: 4px;">
+        Contrast
+      </button>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <div class="article-wrapper-forced">
+    <article class="article-container-forced">
+        <header style="text-align: center; margin-bottom: 3rem;">
+            <h1 style="line-height: 1.4;">コントラスト比の基本</h1>
+            <p class="post-meta" style="color: #666;">
+                <time datetime="2026-01-01T00:00:00+09:00">2026年01月01日</time>
+            </p>
+        </header>
+
+        <div class="article-content">
+            <p>視覚アクセシビリティにおいて、テキストと背景色のコントラスト比は重要です。WCAG 2.1では、最低でも4.5:1（標準テキスト）を推奨しています。</p>
+
+<p>必ずしも黒背景やダークモードに白文字がいいとは限りません。乱視などにより、コントラストが高すぎると見づらい場合もあるからです。</p>
+
+<p>これはWebサイトだけに限らず、モバイルアプリやデスクトップアプリ、印刷物に対しても同じことがいえます。</p>
+
+<p>見え方には個人差があります。このため個人個人がそれぞれ選択できるようにしておいた方が賢明です。</p>
+
+        </div>
+
+        <footer style="margin-top: 4rem; text-align: center;">
+            <a href="/A11yLab/" class="btn btn--primary">ホームに戻る</a>
+        </footer>
+    </article>
+</div>
+  </main>
+
+  <footer role="contentinfo" style="text-align: center; padding: 2rem; margin-top: 4rem; border-top: 1px solid var(--border-color);">
+    <p>&copy; 2026 A11yLab. All rights reserved.</p>
+  </footer>
+</body>
+</html>

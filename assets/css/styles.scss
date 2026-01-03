@@ -1,11 +1,12 @@
 ---
 ---
-
 // Color Variables
+
 :root {
   --bg-color: #fcfcfc;
   --text-color: #222222;
-  --accent-color: #007bff; /* Example accent */
+  --accent-color: #007bff;
+  /* Example accent */
   --card-bg: #ffffff;
   --border-color: #e0e0e0;
   --link-color: #0056b3;
@@ -36,7 +37,8 @@ body {
 
 // Focus styles
 :focus-visible {
-  outline: 3px solid #ff7f50; /* Orange for high visibility */
+  outline: 3px solid #ff7f50;
+  /* Orange for high visibility */
   outline-offset: 2px;
 }
 
@@ -50,6 +52,7 @@ body {
   padding: 8px;
   z-index: 1000;
   text-decoration: none;
+
   &:focus {
     top: 0;
   }
@@ -68,4 +71,137 @@ body {
 
 .card:hover .card-illustration {
   transform: scale(1.05);
+}
+
+/* A11yLab 記事ページ専用の強力なスタイルオーバーライド */
+
+/* 1. 記事を包むラッパーを画面中央に配置 */
+/* 既存のテーマが何であれ、flexboxで強制的に中央寄せする */
+body.layout-article>main,
+/* テーマによって構造が違う場合への保険 */
+.article-wrapper-forced {
+  display: flex !important;
+  justify-content: center !important;
+  width: 100% !important;
+  padding: 2rem 1rem !important;
+  box-sizing: border-box !important;
+}
+
+/* 2. 記事本文の幅を「25文字相当」に制限 */
+/* max-widthにch単位またはrem単位を使い、それ以上広がらないようにする */
+.article-container-forced {
+  /* 日本語25文字 + 多少の余白で約 32rem〜35ch が目安 */
+  max-width: 32rem !important;
+  /* スマホなどで画面からはみ出さないための安全策 */
+  width: 100% !important;
+  /* コンテナ自体は中央だが、中のテキストは読みやすさのため左揃え */
+  text-align: left !important;
+  /* 可読性を高めるゆったりした行間 */
+  line-height: 1.9 !important;
+}
+
+/* 3. 記事内の画像がコンテナ幅を超えないようにする */
+.article-container-forced img {
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 8px;
+  /* 任意：少し角を丸くしてデザインを整える */
+  /* 画像の上下に余白を入れる */
+}
+
+/* =========================================
+   Home Page / LP Styles
+   ========================================= */
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  padding: 8rem 2rem;
+  background: linear-gradient(135deg, var(--bg-color) 0%, var(--card-bg) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.05em;
+  background: linear-gradient(to right, var(--text-color), var(--accent-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-content p {
+  font-size: 1.25rem;
+  color: var(--text-color);
+  opacity: 0.8;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Features Grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  display: block;
+  background: var(--card-bg);
+  padding: 2.5rem;
+  border-radius: 16px;
+  text-decoration: none;
+  color: var(--text-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.feature-card:hover,
+.feature-card:focus {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-color);
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+/* Statement Section */
+.statement-section {
+  text-align: center;
+  padding: 6rem 2rem;
+  background: var(--bg-color);
+  border-top: 1px solid var(--border-color);
+}
+
+.statement-section p {
+  font-size: 1.5rem;
+  font-weight: 500;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
 }
