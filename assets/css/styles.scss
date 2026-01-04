@@ -1,6 +1,4 @@
----
----
-// Color Variables
+--- --- // Color Variables
 
 :root {
   --bg-color: #fcfcfc;
@@ -9,7 +7,7 @@
   /* Example accent */
   --card-bg: #ffffff;
   --border-color: #e0e0e0;
-  --link-color: #0056b3;
+  --link-color: #004a99; // よりコントラストの高い青に変更
 }
 
 [data-theme="dark"] {
@@ -18,7 +16,7 @@
   --accent-color: #4da3ff;
   --card-bg: #2a2a2a;
   --border-color: #333333;
-  --link-color: #80bdff;
+  --link-color: #00e5ff; // ブライトシアン: ダーク背景でも非常に高いコントラスト
 }
 
 body {
@@ -28,6 +26,19 @@ body {
   margin: 0;
   padding: 0;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 0.2s ease;
+
+  &:hover,
+  &:focus {
+    opacity: 0.8;
+    text-decoration-thickness: 2px;
+  }
 }
 
 // Reset & Utilities
