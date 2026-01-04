@@ -18,7 +18,7 @@
   --accent-color: #4da3ff;
   --card-bg: #2a2a2a;
   --border-color: #333333;
-  --link-color: #80bdff;
+  --link-color: #5fd4ff; /* 高コントラストのシアン系で色覚障害にも配慮 */
 }
 
 body {
@@ -28,6 +28,21 @@ body {
   margin: 0;
   padding: 0;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// Link styles
+a {
+  color: var(--link-color);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: opacity 0.2s ease, text-decoration-thickness 0.2s ease;
+
+  &:hover,
+  &:focus {
+    opacity: 0.85;
+    text-decoration-thickness: 2px;
+  }
 }
 
 // Reset & Utilities
