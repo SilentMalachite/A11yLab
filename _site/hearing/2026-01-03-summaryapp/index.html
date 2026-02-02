@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>要約筆記アプリについて | A11yLab</title>
+  <meta name="description" content="アクセシビリティ探求室">
+  <link rel="stylesheet" href="/A11yLab/assets/css/styles.css">
+  <script src="/A11yLab/assets/js/theme-switch.js"></script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+  <header role="banner" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid var(--border-color);">
+    <div class="logo" style="font-weight: bold; font-size: 1.5rem;">
+      <a href="/A11yLab/" style="text-decoration: none; color: var(--text-color);">A11yLab</a>
+    </div>
+    <nav role="navigation" aria-label="メインメニュー">
+      <button id="theme-toggle" aria-label="カラーモード切替" style="background: none; border: 1px solid var(--text-color); color: var(--text-color); padding: 0.5rem 1rem; cursor: pointer; border-radius: 4px;">
+        Contrast
+      </button>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <div class="article-wrapper-forced">
+    <article class="article-container-forced">
+        <header style="text-align: center; margin-bottom: 3rem;">
+            <h1 style="line-height: 1.4;">要約筆記アプリについて</h1>
+            <p class="post-meta" style="color: #666;">
+                <time datetime="2026-01-03T00:00:00+09:00">2026年01月03日</time>
+            </p>
+        </header>
+
+        <div class="article-content">
+            <p><img src="/A11yLab/assets/images/hearing-summaryapp.png" alt="要約筆記アプリのある生活" /></p>
+
+<p>難聴を持つかたにとって、聴覚情報の代替手段として、要約筆記アプリがあります。</p>
+
+<p>聞こえるかたにとっては、「手話があるでしょ？」って思えるかもしれませんが、手話は手話がわかる方同士でないと理解ができないという弱点があります。</p>
+
+<p>私自身の経験からもいえますが、中途失聴・難聴の場合、ある程度話せるので、なかなか手話の必要性を感じないかたも多いです。手話は日本語と同じようにそれそのものが言語ですので、その習得には時間がかかります。</p>
+
+<p>要約筆記は主に講演や各種式典など複数の方に対して、内容を伝えるために用いられることが多いです。
+わかりやすくいえば、話している内容についてリアルタイムで字幕をつけることと捉えてもらえばいいかと思います。</p>
+
+<p>幸いパソコン用の要約筆記アプリはいくつかあります。
+その中で代表的でもっとも多く使われているのは<a href="https://s-kurita-net.secure-web.jp/iptalk/">IPTalk</a>でしょう。
+ただWindows専用であるため、アクセシビリティに優れたmacOS用のアプリがないのは残念です。</p>
+
+<p>そこでこちらでは、いくつか試験的にmac用に要約筆記アプリを作成してみました。いずれもIPTalkを参考にしております。</p>
+
+<p>Kotlin + Ktor製
+<a href="https://github.com/SilentMalachite/SummaryWriterApp">SummaryWriterApp</a></p>
+
+<p>Swift6 + SwiftUI製
+<a href="https://github.com/SilentMalachite/SummaryTalk">SummaryTalk</a></p>
+
+<p>どちらも十分なテストはしておりません。
+テスターを募集しておりますので、お声かけくださると大変助かります。</p>
+
+        </div>
+
+        <footer style="margin-top: 4rem; text-align: center;">
+            <a href="/A11yLab/" class="btn btn--primary">ホームに戻る</a>
+        </footer>
+    </article>
+</div>
+  </main>
+
+  <footer role="contentinfo" style="text-align: center; padding: 2rem; margin-top: 4rem; border-top: 1px solid var(--border-color);">
+    <p>&copy; 2026 A11yLab. All rights reserved.</p>
+  </footer>
+</body>
+</html>
