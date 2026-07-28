@@ -6,6 +6,13 @@ url: "https://SilentMalachite.github.io"
 markdown: kramdown
 theme_mode: auto # custom
 
+# ファイル名や front matter の日付を JST として解釈する。
+# 未指定だとビルド環境のタイムゾーン(GitHub は UTC)基準になり、
+# 日本時間の夜にその日の日付で記事を追加すると UTC ではまだ未来の
+# 扱いになる。Jekyll は既定が future: false のため記事が出力されず、
+# 一覧にリンクだけ出て本体が 404 になる。
+timezone: Asia/Tokyo
+
 collections:
   visual:
     output: true
