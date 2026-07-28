@@ -21,13 +21,10 @@ date: 2026-01-03
 その中で代表的でもっとも多く使われているのは[IPTalk](https://s-kurita-net.secure-web.jp/iptalk/)でしょう。
 ただWindows専用であるため、アクセシビリティに優れたmacOS用のアプリがないのは残念です。
 
-そこでこちらでは、いくつか試験的にmac用に要約筆記アプリを作成してみました。いずれもIPTalkを参考にしております。
-
-Kotlin + Ktor製
-[SummaryWriterApp](https://github.com/SilentMalachite/SummaryWriterApp)
+そこでこちらでは、試験的にmac用に要約筆記アプリを作成してみました。IPTalkを参考にしております。
 
 Swift6 + SwiftUI製
 [SummaryTalk](https://github.com/SilentMalachite/SummaryTalk)
 
-どちらも十分なテストはしておりません。
+十分なテストはしておりません。
 テスターを募集しておりますので、お声かけくださると大変助かります。
