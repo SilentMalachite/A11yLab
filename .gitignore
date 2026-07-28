@@ -1,0 +1,14 @@
+# Jekyll のビルド成果物
+# デプロイは .github/workflows/jekyll.yml がソースから再ビルドするため、
+# _site/ をリポジトリに含める必要はない。
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+
+# 依存関係
+/vendor/
+/node_modules/
+
+# macOS
+.DS_Store
