@@ -50,6 +50,15 @@ a {
   box-sizing: border-box;
 }
 
+// 画像がコンテナ幅を超えないようにする全体の下地。
+// 記事ページは .article-container-forced img 側で個別に指定しているが、
+// 一覧ページ(/visual/ 等)は excerpt の画像がここだけで制御されるため、
+// この指定がないと画像の実寸のまま表示され狭い画面で横にはみ出す。
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 // Focus styles
 :focus-visible {
   outline: 3px solid #ff7f50;
