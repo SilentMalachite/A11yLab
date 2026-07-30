@@ -6,27 +6,45 @@
   <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ site.description }}">
   <link rel="stylesheet" href="{{ "/assets/css/styles.css" | relative_url }}">
+  {%- comment -%}
+    テーマ適用は描画前に済ませる必要があるため、あえて defer を付けずに
+    head で同期読み込みする。遅らせると light で一度描画されてから
+    dark に切り替わり、光過敏のあるかたに強い明滅を見せてしまう。
+  {%- endcomment -%}
   <script src="{{ "/assets/js/theme-switch.js" | relative_url }}"></script>
 </head>
-<body>
+{%- comment -%}
+  body_class は index.html のようなページ側と、article.html のような
+  レイアウト側の双方で指定されうる。レイアウトの front matter は page.* には
+  載らず layout.* から読むため、両方を見ないと記事ページでクラスが落ちる。
+{%- endcomment -%}
+<body class="{{ page.body_class | default: layout.body_class }}">
   <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
 
-  <header role="banner" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid var(--border-color);">
-    <div class="logo" style="font-weight: bold; font-size: 1.5rem;">
-      <a href="{{ "/" | relative_url }}" style="text-decoration: none; color: var(--text-color);">A11yLab</a>
-    </div>
-    <nav role="navigation" aria-label="メインメニュー">
-      <button id="theme-toggle" aria-label="カラーモード切替" style="background: none; border: 1px solid var(--text-color); color: var(--text-color); padding: 0.5rem 1rem; cursor: pointer; border-radius: 4px;">
-        Contrast
-      </button>
-    </nav>
+  <header class="site-header">
+    <p class="site-logo"><a href="{{ "/" | relative_url }}">A11yLab</a></p>
+
+    {%- comment -%}
+      テーマ切替は「移動」ではないので nav ランドマークには入れない。
+      ランドマーク一覧に空のメインメニューが並ぶと、支援技術の利用者が
+      存在しないナビゲーションを探すことになる。
+
+      表示ラベルと支援技術に読まれる名前は一致させる (WCAG 2.5.3)。
+      音声操作の利用者は画面に見えている「ダークモード」と発話するため、
+      aria-label で別の文言に差し替えると起動できなくなる。
+      現在の状態は aria-pressed で伝える。
+    {%- endcomment -%}
+    <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false">
+      <span class="theme-toggle__icon" aria-hidden="true">◐</span>
+      <span>ダークモード</span>
+    </button>
   </header>
 
   <main id="main-content">
     {{ content }}
   </main>
 
-  <footer role="contentinfo" style="text-align: center; padding: 2rem; margin-top: 4rem; border-top: 1px solid var(--border-color);">
+  <footer class="site-footer">
     <p>&copy; {{ site.time | date: '%Y' }} A11yLab. All rights reserved.</p>
   </footer>
 </body>

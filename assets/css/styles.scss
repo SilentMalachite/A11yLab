@@ -3,6 +3,11 @@
 // Color Variables
 
 :root {
+  // フォームコントロールやスクロールバーなどブラウザ描画の UI を
+  // テーマに追従させる。指定しないと dark テーマでも白いスクロールバーが
+  // 残り、コントラストの期待が崩れる。
+  color-scheme: light;
+
   --bg-color: #fcfcfc;
   --text-color: #222222;
   --accent-color: #007bff;
@@ -10,15 +15,42 @@
   --card-bg: #ffffff;
   --border-color: #e0e0e0;
   --link-color: #0056b3;
+
+  // 補助テキスト(日付など)。#fcfcfc に対して 6.5:1。
+  --muted-color: #5c5c5c;
+
+  // スキップリンク。白文字を --accent-color (#007bff) に載せると 3.98:1 で
+  // WCAG 1.4.3 の 4.5:1 に届かないため、専用の濃い青を持たせる。10.0:1。
+  --skip-bg: #0b3d91;
+  --skip-fg: #ffffff;
+
+  // フォーカスリング。コーラル (#ff7f50) は明るい背景に対して 2.44:1 しか
+  // 出ず、非テキストコントラスト 3:1 (WCAG 1.4.11 / 2.4.11) を満たさない。
+  // 明背景用に濃いオレンジを使う。#fcfcfc に対して 5.1:1。
+  --focus-color: #c2410c;
+  // リングとの境界を作る色。色付きカードの上でもリングが埋もれないよう、
+  // outline-offset の隙間をこの色で塗る。
+  --focus-halo: #ffffff;
 }
 
 [data-theme="dark"] {
+  color-scheme: dark;
+
   --bg-color: #1a1a1a;
   --text-color: #eeeeee;
   --accent-color: #4da3ff;
   --card-bg: #2a2a2a;
   --border-color: #333333;
   --link-color: #00d4ff; /* 非常に明るいシアンで高い視認性を確保 */
+
+  --muted-color: #b0b0b0; // #1a1a1a に対して 8.4:1
+
+  // 暗い背景では明るい面に濃い文字を載せたほうが視認しやすい。8.8:1。
+  --skip-bg: #e8f0fe;
+  --skip-fg: #0b3d91;
+
+  --focus-color: #ff9d6b; // #1a1a1a に対して 8.9:1
+  --focus-halo: #1a1a1a;
 }
 
 body {
@@ -50,6 +82,28 @@ a {
   box-sizing: border-box;
 }
 
+// 前庭障害や光過敏のあるかたは動きで体調を崩すことがある。OS で
+// 「視差効果を減らす」を選んでいる利用者には動きを止める (WCAG 2.3.3)。
+// 完全な 0 ではなく 0.01ms にするのは、transitionend を待つスクリプトが
+// 発火しないまま固まるのを避けるため。
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  // 位置や拡大の変化そのものが刺激になるので、値ごと打ち消す。
+  .feature-card:hover,
+  .feature-card:focus-visible,
+  .card:hover .card-illustration {
+    transform: none !important;
+  }
+}
+
 // 画像がコンテナ幅を超えないようにする全体の下地。
 // 記事ページは .article-container-forced img 側で個別に指定しているが、
 // 一覧ページ(/visual/ 等)は excerpt の画像がここだけで制御されるため、
@@ -61,9 +115,20 @@ img {
 
 // Focus styles
 :focus-visible {
-  outline: 3px solid #ff7f50;
-  /* Orange for high visibility */
+  outline: 3px solid var(--focus-color);
   outline-offset: 2px;
+  // outline-offset で空く隙間を反転色で塗る。カードやボタンなど背景色を
+  // 持つ要素の上でも、リングが必ず既知の色と隣り合うので沈まない。
+  box-shadow: 0 0 0 2px var(--focus-halo);
+}
+
+// Windows ハイコントラストモードではカスタム色が無効化されるため、
+// システムのフォーカス色に委ねる。
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 3px solid Highlight;
+    box-shadow: none;
+  }
 }
 
 // Skip Link
@@ -71,15 +136,125 @@ img {
   position: absolute;
   top: -100px;
   left: 0;
-  background: var(--accent-color);
-  color: white;
-  padding: 8px;
+  background: var(--skip-bg);
+  color: var(--skip-fg);
+  padding: 12px 16px;
   z-index: 1000;
-  text-decoration: none;
+  text-decoration: underline;
+  font-weight: 600;
 
   &:focus {
     top: 0;
   }
+}
+
+// =========================================
+//   Header / Footer
+// =========================================
+// もとは default.html の style 属性に直書きしていた。インラインだと
+// テーマ変数やメディアクエリで上書きできず、reduced-motion や
+// forced-colors の対応漏れが起きるためCSSへ移した。
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.site-logo {
+  margin: 0;
+  font-weight: bold;
+  font-size: 1.5rem;
+
+  a {
+    color: var(--text-color);
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      text-decoration: underline;
+    }
+  }
+}
+
+.site-footer {
+  text-align: center;
+  padding: 2rem;
+  margin-top: 4rem;
+  border-top: 1px solid var(--border-color);
+}
+
+// テーマ切替ボタン。ポインタの精度が低い利用者でも押せるよう、
+// 実寸で 44px 角以上を確保する (WCAG 2.5.8 の推奨サイズ)。
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: 1px solid var(--text-color);
+  border-radius: 4px;
+  color: var(--text-color);
+  font: inherit;
+  cursor: pointer;
+
+  &[aria-pressed="true"] {
+    background: var(--card-bg);
+  }
+}
+
+.theme-toggle__icon {
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+// 狭い画面でラベルが折り返してボタンが縦に伸びるのを防ぐ。ラベル自体は
+// 隠さない。display:none にするとアクセシブルネームまで消え、アイコンは
+// aria-hidden なので名前の無いボタンになってしまう。
+@media (max-width: 30rem) {
+  .site-header {
+    padding: 1rem;
+  }
+
+  .theme-toggle {
+    white-space: nowrap;
+  }
+}
+
+// =========================================
+//   Buttons
+// =========================================
+// 記事末尾の「ホームに戻る」で使っているクラス。定義が無く素のリンクとして
+// 描画されていたため、指やポインタで狙える大きさを持つ実体を用意する。
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration: underline;
+  }
+}
+
+.btn--primary {
+  background: var(--skip-bg);
+  color: var(--skip-fg);
+  border: 1px solid transparent;
+}
+
+// 補助テキスト(記事の日付など)
+.post-meta {
+  color: var(--muted-color);
 }
 
 // Card Illustrations
@@ -158,8 +333,10 @@ img {
 
 /* 1. 記事を包むラッパーを画面中央に配置 */
 /* 既存のテーマが何であれ、flexboxで強制的に中央寄せする */
-body.layout-article>main,
-/* テーマによって構造が違う場合への保険 */
+/* NOTE: 以前は body.layout-article>main も同じ指定を受けていたが、body に
+   クラスが出力されていなかったため常に不一致だった。body_class を出すように
+   した今このセレクタを残すと main と .article-wrapper-forced の padding が
+   二重にかかるので、実際に機能している側だけを残す。 */
 .article-wrapper-forced {
   display: flex !important;
   justify-content: center !important;
@@ -210,10 +387,31 @@ body.layout-article>main,
   font-weight: 800;
   margin-bottom: 1.5rem;
   letter-spacing: -0.05em;
-  background: linear-gradient(to right, var(--text-color), var(--accent-color));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  // まず必ず読める実体の色を置く。グラデーション文字は下の @supports の
+  // 中だけで有効にし、background-clip: text が効かない環境で
+  // -webkit-text-fill-color: transparent だけが残って
+  // 見出しが消えることを防ぐ。
+  color: var(--text-color);
+}
+
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .hero-content h1 {
+    background: linear-gradient(to right, var(--text-color), var(--accent-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+// Windows ハイコントラストモードでは背景画像(グラデーション)が消される一方
+// -webkit-text-fill-color: transparent は残るため、見出しが完全に不可視に
+// なる。システム色で塗り直す (WCAG 1.4.3 / 1.4.8)。
+@media (forced-colors: active) {
+  .hero-content h1 {
+    background: none;
+    -webkit-text-fill-color: CanvasText;
+    color: CanvasText;
+  }
 }
 
 .hero-content p {
@@ -248,7 +446,7 @@ body.layout-article>main,
 }
 
 .feature-card:hover,
-.feature-card:focus {
+.feature-card:focus-visible {
   transform: translateY(-8px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
   border-color: var(--accent-color);
@@ -259,7 +457,7 @@ body.layout-article>main,
   margin-bottom: 1.5rem;
 }
 
-.feature-card h3 {
+.feature-card h2 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
   font-weight: 700;

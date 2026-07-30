@@ -8,7 +8,12 @@ body_class: layout-article
     <article class="article-container-forced">
         <header style="text-align: center; margin-bottom: 3rem;">
             <h1 style="line-height: 1.4;">{{ page.title }}</h1>
-            <p class="post-meta" style="color: #666;">
+            {%- comment -%}
+              日付の色は #666 を直接書かない。dark テーマの背景 (#1a1a1a) に
+              対して 3.03:1 しか出ず WCAG 1.4.3 (4.5:1) を満たさないため、
+              テーマごとに切り替わる --muted-color を使う。
+            {%- endcomment -%}
+            <p class="post-meta">
                 <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y年%m月%d日" }}</time>
             </p>
         </header>

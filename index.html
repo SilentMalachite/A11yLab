@@ -12,22 +12,32 @@ body_class: layout-home
     </div>
 </section>
 
+{%- comment -%}
+  見出しは h1 の次を h2 にする。h3 に飛ばすと見出しジャンプで移動する
+  支援技術の利用者に「抜けた階層がある」と誤解させる (WCAG 1.3.1)。
+
+  絵文字は装飾なので aria-hidden で読み上げから外す。付けないとリンク名が
+  「👁️ Visual Accessibility 見えにくい…」と読まれ、音声操作で狙いにくい。
+
+  英語見出しには lang="en" を付け、日本語音声で読み違えられないようにする
+  (WCAG 3.1.2)。
+{%- endcomment -%}
 <section class="features-grid">
     <a href="{{ '/visual/' | relative_url }}" class="feature-card">
-        <div class="card-icon">👁️</div>
-        <h3>Visual Accessibility</h3>
+        <div class="card-icon" aria-hidden="true">👁️</div>
+        <h2 lang="en">Visual Accessibility</h2>
         <p>見えにくい・見えないかたへ</p>
     </a>
 
     <a href="{{ '/hearing/' | relative_url }}" class="feature-card">
-        <div class="card-icon">👂</div>
-        <h3>Hearing Accessibility</h3>
+        <div class="card-icon" aria-hidden="true">👂</div>
+        <h2 lang="en">Hearing Accessibility</h2>
         <p>聞こえにくいかたへ</p>
     </a>
 
     <a href="{{ '/physical/' | relative_url }}" class="feature-card">
-        <div class="card-icon">✋</div>
-        <h3>Physical Accessibility</h3>
+        <div class="card-icon" aria-hidden="true">✋</div>
+        <h2 lang="en">Physical Accessibility</h2>
         <p>うまく操作できないかたへ</p>
     </a>
 </section>
