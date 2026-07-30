@@ -2,12 +2,18 @@
 layout: default
 ---
 
-<h1>身体アクセシビリティ記事一覧</h1>
-<ul>
-    {% for post in site.physical %}
-    <li>
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        <p>{{ post.excerpt }}</p>
-    </li>
-    {% endfor %}
-</ul>
+<div class="post-list-page">
+    <h1>身体アクセシビリティ記事一覧</h1>
+    {%- comment -%}
+      list-style: none を当てると Safari/VoiceOver がリストの意味づけを
+      落とすため、role="list" で明示的に補う。
+    {%- endcomment -%}
+    <ul class="post-list" role="list">
+        {% for post in site.physical %}
+        <li class="post-list__item">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            <div class="post-list__excerpt">{{ post.excerpt }}</div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>

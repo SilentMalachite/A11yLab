@@ -97,6 +97,63 @@ img {
   transform: scale(1.05);
 }
 
+// =========================================
+//   記事一覧ページ (/hearing/ など)
+// =========================================
+// 一覧の excerpt には記事冒頭の画像がそのまま入る。何も指定しないと
+// 元画像の実寸(800〜1024px)で並ぶため、記事ごとに大きさも縦横比も
+// ばらついて一覧が読みにくくなる。
+// 画像内に文字が描かれているものがあるので切り抜き(object-fit: cover)は
+// 使わず、高さを揃えることで見た目を整える。
+
+.post-list-page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+.post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-list__item {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border-color);
+
+  &:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  >a {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.7;
+  }
+}
+
+.post-list__excerpt {
+  margin-top: 0.75rem;
+
+  // kramdown が excerpt を <p> で包むぶんの余白を打ち消す
+  p {
+    margin: 0;
+  }
+
+  img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 240px;
+    border-radius: 8px;
+  }
+}
+
 /* A11yLab 記事ページ専用の強力なスタイルオーバーライド */
 
 /* 1. 記事を包むラッパーを画面中央に配置 */
