@@ -157,11 +157,65 @@ img {
 
 .site-header {
   display: flex;
+  // ナビを次の行へ回り込ませるために必要。
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
   padding: 1rem 2rem;
   border-bottom: 1px solid var(--border-color);
+}
+
+// =========================================
+//   グローバルナビゲーション
+// =========================================
+// ロゴとテーマ切替の下に全幅で並ぶ。order は使わない。CSS で並べ替えると
+// 読み上げ順とタブ順が見た目と食い違い、キーボードのフォーカスが画面上を
+// 行き来する (WCAG 1.3.2 / 2.4.3)。DOM の順序がそのまま視覚順になっている。
+.site-nav {
+  flex-basis: 100%;
+}
+
+.site-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  // 行が折り返したときも項目どうしがくっつかないよう、行間も指定する。
+  gap: 0.25rem 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+// ポインタの精度が低い利用者でも狙えるよう、実寸で 44px 角以上を確保する
+// (WCAG 2.5.8)。テーマ切替ボタンと同じ基準。
+// ラベルは2文字 (約32px) しかなく padding だけでは 44px に届かないため、
+// min-width も併せて指定する。padding を残してあるのは、文字数の多い
+// ラベルを足したときにも当たり判定が文字の外側へ広がるようにするため。
+.site-nav__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.5rem;
+  min-width: 44px;
+  justify-content: center;
+  color: var(--text-color);
+  text-decoration: none;
+  // 現在地の下線ぶんの高さを最初から確保しておく。透明にしておかないと、
+  // ページを移動するたびに項目の高さが変わってヘッダー全体がずれる。
+  border-bottom: 3px solid transparent;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration: underline;
+  }
+}
+
+// 現在地。色だけで示すと色覚特性のある利用者や、色を落とす表示設定では
+// 区別できない (WCAG 1.4.1)。太さと下線という色以外の手がかりで示す。
+// currentColor なので Windows ハイコントラストモードでも残る。
+.site-nav__link[aria-current] {
+  font-weight: 700;
+  border-bottom-color: currentColor;
 }
 
 .site-logo {
@@ -250,6 +304,26 @@ img {
   background: var(--skip-bg);
   color: var(--skip-fg);
   border: 1px solid transparent;
+}
+
+// 記事末尾の「◯◯記事一覧へ」。主要導線の「ホームに戻る」と区別できるよう
+// 塗りではなく枠線で示す。--link-color は light #0056b3 (約 7:1)、
+// dark #00d4ff でどちらも文字コントラスト 4.5:1 を満たし、枠線は
+// currentColor なので非テキストコントラスト 3:1 も満たす (WCAG 1.4.11)。
+.btn--secondary {
+  background: transparent;
+  color: var(--link-color);
+  border: 1px solid currentColor;
+}
+
+// 記事末尾の導線。もとは footer の style 属性に直書きしていた。
+// ボタンが2つになったので、狭い画面で折り返せるようにする。
+.article-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 4rem;
 }
 
 // 補助テキスト(記事の日付など)

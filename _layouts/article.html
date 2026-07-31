@@ -22,7 +22,24 @@ body_class: layout-article
             {{ content }}
         </div>
 
-        <footer style="margin-top: 4rem; text-align: center;">
+        {%- comment -%}
+          記事から所属セクションの一覧へ戻れるようにする。これが無いと
+          一覧に戻るのに一度ホームを経由することになり、同じ分野の記事を
+          続けて読む利用者ほど操作回数が増える。
+
+          リンク文言はセクションページの title をそのまま引く。ここに
+          文字列を直接書くと、遷移先の見出しと食い違ったときに気づけない。
+
+          新しい nav ランドマークは作らない。ランドマークは増えるほど
+          一覧から目的のものを探しにくくなり、ヘッダーのグローバルナビが
+          既にその役割を持っている。
+        {%- endcomment -%}
+        {%- assign section = site.data.navigation | where: "key", page.collection | first -%}
+        {%- assign section_page = site.pages | where: "url", section.url | first -%}
+        <footer class="article-footer">
+            {%- if section_page %}
+            <a href="{{ section.url | relative_url }}" class="btn btn--secondary">{{ section_page.title }}へ</a>
+            {%- endif %}
             <a href="{{ '/' | relative_url }}" class="btn btn--primary">ホームに戻る</a>
         </footer>
     </article>

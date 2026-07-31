@@ -1,9 +1,14 @@
 ---
 layout: default
+# このセクション名の唯一の出どころ。<title>・h1・記事末尾の戻り先リンクの
+# 文言がすべてここから来る。title: が無いと <title> がサイト名だけになり、
+# 3つの一覧ページが履歴やタブ、支援技術のページ一覧で区別できない
+# (WCAG 2.4.2)。
+title: 聴覚アクセシビリティ記事一覧
 ---
 
 <div class="post-list-page">
-    <h1>聴覚アクセシビリティ記事一覧</h1>
+    <h1>{{ page.title }}</h1>
     {%- comment -%}
       list-style: none を当てると Safari/VoiceOver がリストの意味づけを
       落とすため、role="list" で明示的に補う。

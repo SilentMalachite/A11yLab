@@ -1,6 +1,8 @@
 ---
 layout: default
-title: A11yLab
+# title: は置かない。default.html が「{{ page.title }} | {{ site.title }}」を
+# 組み立てるため、ここに A11yLab と書くと <title> が「A11yLab | A11yLab」に
+# なる。ページ内の h1 は独自の文言を持っており page.title を参照しない。
 # トップページ専用のクラスをbodyに付与
 body_class: layout-home
 ---

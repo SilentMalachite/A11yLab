@@ -1,0 +1,35 @@
+{%- comment -%}
+  グローバルナビゲーション。全ページの同じ位置に同じ順序で出す (WCAG 3.2.3)。
+
+  aria-label を付けるのは、ランドマーク一覧に「ナビゲーション」が複数並んだ
+  ときに区別できるようにするため。ラベルに「ナビゲーション」の語は入れない。
+  支援技術がロール名を自動で読み上げるので「メインメニュー ナビゲーション」
+  となり、重複する。
+
+  list-style: none を当てると Safari/VoiceOver がリストの意味づけを落とすため、
+  role="list" で明示的に補う (このサイトの記事一覧と同じ理由)。
+
+  現在地は2種類を使い分ける。
+    aria-current="page" … 表示中のページそのもの (/hearing/ を見ている)
+    aria-current="true" … 表示中のページが属するセクション (/hearing/ 配下の記事)
+  記事を読んでいるときに「聴覚」へ page を付けるのは誤りで、そのリンク先は
+  現在のページではない。true なら「現在のもの」という正しい意味になり、
+  スクリーンリーダーは同じく「現在」と読み上げる。
+{%- endcomment -%}
+<nav class="site-nav" aria-label="メインメニュー">
+  <ul class="site-nav__list" role="list">
+    {%- for item in site.data.navigation -%}
+      {%- if page.url == item.url -%}
+        {%- assign current = "page" -%}
+      {%- elsif page.collection == item.key -%}
+        {%- assign current = "true" -%}
+      {%- else -%}
+        {%- assign current = "" -%}
+      {%- endif -%}
+      <li class="site-nav__item">
+        <a class="site-nav__link" href="{{ item.url | relative_url }}"
+           {%- if current != "" %} aria-current="{{ current }}"{% endif %}>{{ item.label }}</a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</nav>

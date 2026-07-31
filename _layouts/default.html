@@ -38,6 +38,14 @@
       <span class="theme-toggle__icon" aria-hidden="true">◐</span>
       <span>ダークモード</span>
     </button>
+
+    {%- comment -%}
+      ナビはロゴとテーマ切替の下の行に出る。CSS の order で並べ替えず、
+      DOM の順序をそのまま視覚順にしている。order で入れ替えると読み上げ順
+      とタブ順が見た目と食い違い、キーボードのフォーカスが画面上を
+      行き来する (WCAG 1.3.2 / 2.4.3)。
+    {%- endcomment -%}
+    {% include site-nav.html %}
   </header>
 
   <main id="main-content">
