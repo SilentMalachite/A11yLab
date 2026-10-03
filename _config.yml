@@ -14,6 +14,9 @@ theme_mode: auto # custom
 timezone: Asia/Tokyo
 
 collections:
+  general:
+    output: true
+    permalink: /:collection/:name/
   visual:
     output: true
     permalink: /:collection/:name/
@@ -30,6 +33,7 @@ exclude:
   - Gemfile.lock
   - node_modules
   - vendor
+  - docs
 
 sass:
   style: compressed

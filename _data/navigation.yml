@@ -13,6 +13,10 @@
 # key は _config.yml の collections 名と一致させること。記事ページから
 # 所属セクションを引くのにこの値を使う。
 
+- key: general
+  label: 一般
+  url: /general/
+
 - key: visual
   label: 視覚
   url: /visual/
